@@ -13,18 +13,20 @@
     <script type="text/javascript">
         var rows =<%-JSON.stringify(result)%>
         GojsatableOfJson(rows)
-        console.log(rows)
+        
     </script>
  <div class="G_addDiv">
      <form action="/secure/addLeng" method="post">
          
          <label for="">Word</label>
-         <input type="text" name="word">
-         <label for="">Language</label>
-         <input type="text" name="language">
-         <button>Add</button>
+         <input id="G_inputWord" type="text" name="word">
+         <label  for="">Language</label>
+         <input id="G_inputL" type="text" name="language">
+         <button id="G_addButton">Add</button>
         
      </form>
  </div>
+ <script src="../public/js/validation.js"></script>
+ 
 </body>
 </html>

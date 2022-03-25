@@ -2,6 +2,7 @@ require('dotenv').config()
 const axios = require("axios").default;
 const Translate = require('../models/translate')
 async function getTrs(req, res, next) {
+    
     res.setHeader('Content-Type', 'application/json');
     let result;
     try {
@@ -35,7 +36,7 @@ async function getTrs(req, res, next) {
                     headers: {
                         'content-type': 'application/json',
                         'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com',
-                        'X-RapidAPI-Key': '51b11b8d9emsh1d8ae762e98f169p139094jsn01129a5a590b'
+                        'X-RapidAPI-Key': process.env.API_KEY
                     },
                     data: {
                         from: 'en',
@@ -103,7 +104,7 @@ async function getTrsHtml(req, res, next) {
                     headers: {
                         'content-type': 'application/json',
                         'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com',
-                        'X-RapidAPI-Key': '51b11b8d9emsh1d8ae762e98f169p139094jsn01129a5a590b'
+                        'X-RapidAPI-Key': process.env.API_KEY
                     },
                     data: {
                         from: 'en',

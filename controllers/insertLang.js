@@ -2,7 +2,7 @@ const Translate = require('../models/translate')
 
 function checkAndInser() {
     Translate.count({}, async function(err, count) {
-        
+       
         if (count == 0) {
 
 
