@@ -1,0 +1,17 @@
+.G_addDiv{
+    margin-top: 50px;
+}
+input{
+    display: block;
+    padding: 5px;
+    box-shadow: 2px 2px 4px silver;
+    border-radius: 4px;
+    border: 1px solid;
+}
+button{
+    margin-top: 10px;
+}
+label{
+    display: block;
+    padding-top: 10px;
+}
