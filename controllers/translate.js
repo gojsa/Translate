@@ -1,8 +1,8 @@
 require('dotenv').config()
 const axios = require("axios").default;
 const Translate = require('../models/translate')
-async function getTrs(req, res, next) {
-    
+exports.getTrs = async function(req, res) {
+
     res.setHeader('Content-Type', 'application/json');
     let result;
     try {
@@ -69,77 +69,77 @@ async function getTrs(req, res, next) {
 
 
 }
-async function getTrsHtml(req, res, next) {
+exports.getTrsHtml = async function(req, res) {
 
-    let result;
-    try {
-        //Check for env variable for external translate or db translate
-        if (process.env.TYPE == "DB") {
-            if (req.query.language) {
-                //Query
-                result = await Translate.find({ language: req.query.language })
+        let result;
+        try {
+            //Check for env variable for external translate or db translate
+            if (process.env.TYPE == "DB") {
+                if (req.query.language) {
+                    //Query
+                    result = await Translate.find({ language: req.query.language })
 
-                if (result.length == 0) {
+                    if (result.length == 0) {
 
-                    return res.render('index', { message: "Cannot find language" })
+                        return res.render('index', { message: "Cannot find language" })
+
+                    } else {
+
+                        return res.render('index', { message: result[0].word })
+                    }
 
                 } else {
-
+                    //Default english
+                    result = await Translate.find({ language: "english" })
                     return res.render('index', { message: result[0].word })
+
+
                 }
-
             } else {
-                //Default english
-                result = await Translate.find({ language: "english" })
-                return res.render('index', { message: result[0].word })
+                if (req.query.language) {
+                    //External service
+                    let options = {
+                        method: 'POST',
+                        url: 'https://rapid-translate-multi-traduction.p.rapidapi.com/t',
+                        headers: {
+                            'content-type': 'application/json',
+                            'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com',
+                            'X-RapidAPI-Key': process.env.API_KEY
+                        },
+                        data: {
+                            from: 'en',
+                            to: req.query.language,
+                            e: '',
+                            q: [
+                                'Hello World'
+                            ]
+                        }
+                    };
+
+                    axios.request(options).then(function(response) {
 
 
+                        return res.render('index', { message: response.data[0] })
+
+                    }).catch(function(err) {
+                        return res.status(500).json({ message: err })
+
+
+                    });
+                } else {
+                    //Default english
+                    return res.render('index', { message: "Hello World" })
+
+                }
             }
-        } else {
-            if (req.query.language) {
-                //External service
-                let options = {
-                    method: 'POST',
-                    url: 'https://rapid-translate-multi-traduction.p.rapidapi.com/t',
-                    headers: {
-                        'content-type': 'application/json',
-                        'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com',
-                        'X-RapidAPI-Key': process.env.API_KEY
-                    },
-                    data: {
-                        from: 'en',
-                        to: req.query.language,
-                        e: '',
-                        q: [
-                            'Hello World'
-                        ]
-                    }
-                };
+        } catch (err) {
 
-                axios.request(options).then(function(response) {
-
-
-                    return res.render('index', { message: response.data[0] })
-
-                }).catch(function(err) {
-                    return res.status(500).json({ message: err })
-
-
-                });
-            } else {
-                //Default english
-                return res.render('index', { message: "Hello World" })
-
-            }
+            return res.status(500).json({ message: err.message })
         }
-    } catch (err) {
 
-        return res.status(500).json({ message: err.message })
     }
-
-}
-//Insert language
-async function insertLang(req, res, next) {
+    //Insert language
+exports.insertLang = async function(req, res, next) {
     let query, word, language;
 
     if (req.body.word && req.body.language) {
@@ -151,7 +151,7 @@ async function insertLang(req, res, next) {
                 word: word,
                 language: language.toLowerCase()
             })
-            next()
+            res.redirect('/secure/admin')
         } catch (error) {
             return res.status(500).json({ message: err.message })
         }
@@ -159,4 +159,15 @@ async function insertLang(req, res, next) {
         return res.redirect('/secure/admin')
     }
 }
-module.exports = { getTrs, getTrsHtml, insertLang }
+
+exports.getAllLang = async function(req, res) {
+    let result;
+    try {
+        result = await Translate.find().select('word language -_id');
+        res.render('admin', { 'result': result })
+
+    } catch (error) {
+        return res.status(500).json({ message: err.message })
+    }
+    return result;
+}

@@ -1,17 +1,9 @@
 const express = require("express");
-const path = require("path")
 const router = express.Router()
-const { getTrs, getTrsHtml } = require('../middleware/translate')
+const translate = require('../controllers/translate')
 
 
-router.get('/hello-rest', getTrs, async(req, res) => {
-
-    res.send.json({ message: res })
-})
-router.get('/hello', getTrsHtml, (req, res) => {
-
-    res.render('index')
-})
-
+router.get('/hello-rest', translate.getTrs)
+router.get('/hello', translate.getTrsHtml)
 
 module.exports = router;

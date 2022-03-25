@@ -23,8 +23,8 @@ db.on('error', (error) => console.log(error))
 db.once('open', () => console.log("Connected to database"))
 
 //Controllers
-const { checkAndInser } = require('./controllers/insertLang')
-const { checkAndInserUser } = require('./controllers/insertUser')
+const { checkAndInser } = require('./DBStart/insertLang')
+const { checkAndInserUser } = require('./DBStart/insertUser')
 
 //Insert user
 checkAndInser()
