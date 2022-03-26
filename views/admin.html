@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +9,26 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <title>Document</title>
 </head>
+
 <body>
     <a href="/secure/logout">Logout</a>
     <script type="text/javascript">
-        var rows =<%-JSON.stringify(result)%>
+        var rows = <%-JSON.stringify(result)%>
         GojsatableOfJson(rows)
-        
     </script>
- <div class="G_addDiv">
-     <form action="/secure/addLeng" method="post">
-         
-         <label for="">Word</label>
-         <input id="G_inputWord" type="text" name="word">
-         <label  for="">Language</label>
-         <input id="G_inputL" type="text" name="language">
-         <button id="G_addButton">Add</button>
-        
-     </form>
- </div>
- <script src="../public/js/validation.js"></script>
- 
+    <div class="G_addDiv G_divAdmin">
+        <form action="/secure/addLeng" method="post">
+
+            <label for="">Word</label>
+            <input id="G_inputWord" type="text" name="word">
+            <label for="">Language</label>
+            <input id="G_inputL" type="text" name="language">
+            <button id="G_addButton">Add</button>
+
+        </form>
+    </div>
+    <script src="../public/js/validation.js"></script>
+
 </body>
+
 </html>

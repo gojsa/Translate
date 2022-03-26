@@ -1,20 +1,22 @@
-
-body{
+body {
     background: #f1f1f1;
 }
-.G_addDiv{
+
+.G_addDiv {
     margin-top: 50px;
 }
-input{
+
+input {
     display: block;
     padding: 10px;
     box-shadow: 2px 2px 4px silver;
     border-radius: 4px;
     border: 1px solid;
-    margin-inline:auto;
+    margin-inline: auto;
     margin-top: 10px;
 }
-button{
+
+button {
     margin-top: 10px;
     padding: 7px;
     border-radius: 4px;
@@ -22,46 +24,69 @@ button{
     background: #7ac2ffcc;
     font-weight: bold;
 }
-button:hover{
-    background: #2395f8cc; 
+
+button:hover {
+    background: #2395f8cc;
     cursor: pointer;
 }
-label{
+
+label {
     display: block;
     padding-top: 2px;
     text-shadow: 0 0 1px #545454;
 }
-.G_formDiv, .G_addDiv{
+
+.G_formDiv,
+.G_addDiv {
     text-align: center;
     margin-top: 200px;
     background: #9f9f9fb0;
     width: 30%;
     margin-inline: auto;
     border-radius: 10px;
-    box-shadow: 0px 0px 6px #000000a3;;
+    box-shadow: 0px 0px 6px #000000a3;
+    ;
 }
-a{
+
+a {
     width: 20px;
-    background: #c0c0c0;;
+    background: #c0c0c0;
+    ;
     padding: 10px;
     margin-bottom: 10px !important;
     text-decoration: none;
     color: red;
     text-shadow: 0 0 1px #545454;
 }
-a:hover{
+
+a:hover {
     background: #63696bc7;
 }
-table{
+
+table {
     margin-top: 20px;
 }
-h2{
+
+h2 {
     text-shadow: 0 0 2px #545454;
 }
-span{
+
+span {
     text-shadow: 0 0 1px #545454;
 }
-.G_errorMsg{
+
+.G_errorMsg {
     display: block;
     color: red;
+}
+
+.G_divAdmin {
+    margin-top: 50px;
+}
+
+@media only screen and (max-width: 750px) {
+    .G_formDiv,
+    .G_addDiv {
+        width: 100%;
+    }
 }
