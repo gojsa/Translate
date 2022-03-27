@@ -22,7 +22,7 @@ exports.getTrs = async function(req, res) {
 
             } else {
                 //Default english query
-                result = await Translate.find({ language: "english" })
+                result = await Translate.find({ language: "en" })
                 return res.json({ message: result[0].word })
 
 
@@ -90,7 +90,7 @@ exports.getTrsHtml = async function(req, res) {
 
                 } else {
                     //Default english
-                    result = await Translate.find({ language: "english" })
+                    result = await Translate.find({ language: "en" })
                     return res.render('index', { message: result[0].word })
 
 
